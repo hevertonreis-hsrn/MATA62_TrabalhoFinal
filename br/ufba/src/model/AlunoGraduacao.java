@@ -1,3 +1,4 @@
+package model;
 public class AlunoGraduacao extends Usuario {
 
     public AlunoGraduacao(String codigo, String nome) {

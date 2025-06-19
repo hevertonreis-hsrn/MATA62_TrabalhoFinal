@@ -1,3 +1,4 @@
+package model;
 public class Exemplar {
     
     private String codigo;

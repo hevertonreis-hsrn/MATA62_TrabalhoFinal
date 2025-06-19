@@ -1,3 +1,7 @@
+package model;
+
+import services.Observer;
+
 public class Professor extends Usuario implements Observer {
 
     public Professor(String codigo, String nome) {

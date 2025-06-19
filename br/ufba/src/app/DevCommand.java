@@ -1,4 +1,5 @@
-public class ObsCommand implements Command{
+package app;
+public class DevCommand implements Command{
     @Override
     public Object executar(Object arg) {
         return null;
