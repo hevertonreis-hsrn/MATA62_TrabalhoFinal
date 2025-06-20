@@ -1,9 +1,9 @@
-package repository;
+package MATA62_TrabalhoFinal.br.ufba.src.repository;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Livro;
-import model.Usuario;
+import MATA62_TrabalhoFinal.br.ufba.src.model.Livro;
+import MATA62_TrabalhoFinal.br.ufba.src.model.Usuario;
 
 public class Repositorio {
     
@@ -24,18 +24,18 @@ public class Repositorio {
         return instancia;
     }
 
-    public Usuario buscarUsuarioPorCodigo(String codigo){
+    public Usuario buscarUsuarioPorCodigo(int codigo){
         for (Usuario usuario : usuarios) {
-            if (usuario.getCodigo().equals(codigo)) {
+            if (usuario.getCodigo() == codigo) {
                 return usuario;
             }
         }
         return null;
     }
 
-    public Livro buscarLivroPorCodigo(String codigo){
+    public Livro buscarLivroPorCodigo(int codigo){
         for (Livro livro : livros) {
-            if (livro.getCodigo().equals(codigo)) {
+            if (livro.getCodigo()  == codigo) {
                 return livro;
             }
         }

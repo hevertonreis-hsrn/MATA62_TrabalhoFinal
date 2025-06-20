@@ -1,24 +1,30 @@
-package model;
+package MATA62_TrabalhoFinal.br.ufba.src.model;
 
-import services.Observer;
 
-public class Professor extends Usuario implements Observer {
+public class Professor extends Usuario {
 
-    public Professor(String codigo, String nome) {
+    public Professor(int codigo, String nome) {
         super(codigo, nome);
-        //TODO Auto-generated constructor stub
     }
 
     @Override
     public void realizarEmprestimo(Livro livro) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'realizarEmprestimo'");
     }
 
     @Override
-    public void notificar(Livro livro) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'notificar'");
+    public void realizarDevolucao(Livro livro) {
+
     }
-    
+
+    @Override
+    public void realizarReserva(Livro livro) {
+
+    }
+
+    @Override
+    public void observarLivro(Livro livro) {
+
+    }
+
+
 }

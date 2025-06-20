@@ -1,15 +1,25 @@
-package model;
+package MATA62_TrabalhoFinal.br.ufba.src.model;
 public class AlunoGraduacao extends Usuario {
 
-    public AlunoGraduacao(String codigo, String nome) {
+    public AlunoGraduacao(int codigo, String nome) {
         super(codigo, nome);
-        //TODO Auto-generated constructor stub
     }
 
     @Override
     public void realizarEmprestimo(Livro livro) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'realizarEmprestimo'");
     }
-    
+
+    @Override
+    public void realizarDevolucao(Livro livro) {
+    }
+
+    public void realizarReserva(Livro livro) {
+
+    }
+
+    @Override
+    public void observarLivro(Livro livro) {
+
+    }
+
 }
