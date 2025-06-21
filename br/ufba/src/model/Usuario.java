@@ -1,4 +1,5 @@
-package MATA62_TrabalhoFinal.br.ufba.src.model;
+package br.ufba.src.model;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,5 +29,8 @@ public abstract class Usuario {
     public abstract void realizarReserva(Livro livro);
 
     public abstract void observarLivro(Livro livro);
+
+    public void consultarNotificacoes() {
+    }
 
 }

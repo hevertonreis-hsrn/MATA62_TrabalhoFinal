@@ -1,7 +1,9 @@
-package MATA62_TrabalhoFinal.br.ufba.src.model;
+package br.ufba.src.model;
 
+import br.ufba.src.services.Observador;
+import br.ufba.src.services.Sujeito;
 
-public class Professor extends Usuario {
+public class Professor extends Usuario implements Observador {
 
     public Professor(int codigo, String nome) {
         super(codigo, nome);
@@ -24,6 +26,12 @@ public class Professor extends Usuario {
     @Override
     public void observarLivro(Livro livro) {
 
+    }
+
+    @Override
+    public void notificar(Sujeito sujeito) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'notificar'");
     }
 
 

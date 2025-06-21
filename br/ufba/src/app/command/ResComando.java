@@ -1,21 +1,22 @@
-package MATA62_TrabalhoFinal.br.ufba.src.app;
+package br.ufba.src.app.command;
 
-import MATA62_TrabalhoFinal.br.ufba.src.model.Usuario;
-import MATA62_TrabalhoFinal.br.ufba.src.repository.Repositorio;
-import MATA62_TrabalhoFinal.br.ufba.src.model.Livro;
+import br.ufba.src.model.Livro;
+import br.ufba.src.model.Usuario;
+import br.ufba.src.repository.Repositorio;
 
-public class DevComando implements Comando {
+public class ResComando implements Comando {
+
     @Override
     public boolean executar(Parametros parametros) {
+
         Repositorio repositorio = Repositorio.getInstancia();
 
         Usuario usuario = repositorio.buscarUsuarioPorCodigo(parametros.getP(1));
 
         Livro livro = repositorio.buscarLivroPorCodigo(parametros.getP(2));
 
-        usuario.realizarDevolucao(livro);
+        usuario.realizarReserva(livro);
 
         return true;
-
     }
 }

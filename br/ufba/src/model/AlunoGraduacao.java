@@ -1,4 +1,4 @@
-package MATA62_TrabalhoFinal.br.ufba.src.model;
+package br.ufba.src.model;
 public class AlunoGraduacao extends Usuario {
 
     public AlunoGraduacao(int codigo, String nome) {

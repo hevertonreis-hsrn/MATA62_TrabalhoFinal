@@ -1,10 +1,10 @@
-package MATA62_TrabalhoFinal.br.ufba.src.app;
+package br.ufba.src.app.command;
 
-import MATA62_TrabalhoFinal.br.ufba.src.model.Livro;
-import MATA62_TrabalhoFinal.br.ufba.src.model.Usuario;
-import MATA62_TrabalhoFinal.br.ufba.src.repository.Repositorio;
+import br.ufba.src.model.Livro;
+import br.ufba.src.model.Usuario;
+import br.ufba.src.repository.Repositorio;
 
-public class ObsComando implements Comando {
+public class EmpComando implements Comando {
     @Override
     public boolean executar(Parametros parametros) {
         Repositorio repositorio = Repositorio.getInstancia();
@@ -13,7 +13,7 @@ public class ObsComando implements Comando {
 
         Livro livro = repositorio.buscarLivroPorCodigo(parametros.getP(2));
 
-        usuario.observarLivro(livro);
+        usuario.realizarEmprestimo(livro);
 
         return true;
     }

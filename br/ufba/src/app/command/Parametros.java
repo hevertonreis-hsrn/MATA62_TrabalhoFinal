@@ -1,4 +1,4 @@
-package MATA62_TrabalhoFinal.br.ufba.src.app;
+package br.ufba.src.app.command;
 
 import java.util.ArrayList;
 

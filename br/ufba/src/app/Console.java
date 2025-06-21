@@ -1,7 +1,18 @@
-package MATA62_TrabalhoFinal.br.ufba.src.app;
+package br.ufba.src.app;
 
 import java.util.HashMap;
 import java.util.Scanner;
+
+import br.ufba.src.app.command.Comando;
+import br.ufba.src.app.command.DevComando;
+import br.ufba.src.app.command.EmpComando;
+import br.ufba.src.app.command.LivComando;
+import br.ufba.src.app.command.NtfComando;
+import br.ufba.src.app.command.ObsComando;
+import br.ufba.src.app.command.Parametros;
+import br.ufba.src.app.command.ResComando;
+import br.ufba.src.app.command.SaiComando;
+import br.ufba.src.app.command.UsuComando;
 
 public class Console {
     public Scanner entrada = new Scanner(System.in);
@@ -28,11 +39,29 @@ public class Console {
         return servico(parametros);
     }
 
+    public void iniciar() {
+        print("=== Sistema Biblioteca Iniciado ===");
+        print("Digite um comando ou 'sai' para encerrar.");
+
+        boolean continuar = true;
+        while (continuar) {
+            continuar = processarEntradaConsole();
+        }
+
+        print("=== Sistema Encerrado ===");
+    }
+
+
     public boolean servico(Parametros parametros) {
-        Comando c = (Comando) comandos.get(parametros.getComando());
+        Comando c = comandos.get(parametros.getComando());
+        if (c == null) {
+            print("Comando invalido.");
+            return true; // Continua executando
+        }
         return c.executar(parametros);
     }
 
+    //TODO: Giovane vai fazer alguma coisa 
     public void print(String texto){
         System.out.println(texto);
     }

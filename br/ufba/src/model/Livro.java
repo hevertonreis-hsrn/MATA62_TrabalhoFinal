@@ -1,6 +1,6 @@
-package MATA62_TrabalhoFinal.br.ufba.src.model;
+package br.ufba.src.model;
 
-import MATA62_TrabalhoFinal.br.ufba.src.services.Sujeito;
+import br.ufba.src.services.Sujeito;
 
 public class Livro extends Sujeito{
 

@@ -1,9 +1,10 @@
-package MATA62_TrabalhoFinal.br.ufba.src.repository;
+package br.ufba.src.repository;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import MATA62_TrabalhoFinal.br.ufba.src.model.Livro;
-import MATA62_TrabalhoFinal.br.ufba.src.model.Usuario;
+import br.ufba.src.model.Livro;
+import br.ufba.src.model.Usuario;
 
 public class Repositorio {
     

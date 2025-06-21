@@ -1,7 +1,7 @@
-package MATA62_TrabalhoFinal.br.ufba.src.app;
+package br.ufba.src.app.command;
 
-import MATA62_TrabalhoFinal.br.ufba.src.model.Usuario;
-import MATA62_TrabalhoFinal.br.ufba.src.repository.Repositorio;
+import br.ufba.src.model.Usuario;
+import br.ufba.src.repository.Repositorio;
 
 public class UsuComando implements Comando {
     @Override
