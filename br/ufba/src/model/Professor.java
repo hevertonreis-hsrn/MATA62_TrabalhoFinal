@@ -5,7 +5,7 @@ import br.ufba.src.services.Sujeito;
 
 public class Professor extends Usuario implements Observador {
 
-    public Professor(int codigo, String nome) {
+    public Professor(String codigo, String nome) {
         super(codigo, nome);
     }
 
@@ -32,6 +32,11 @@ public class Professor extends Usuario implements Observador {
     public void notificar(Sujeito sujeito) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'notificar'");
+    }
+
+    @Override
+    public int getPrazoEmprestimo() {
+        return 8;
     }
 
 

@@ -1,38 +1,54 @@
 package br.ufba.src.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.ufba.src.services.Sujeito;
 
-public class Livro extends Sujeito{
+public class Livro extends Sujeito {
 
-    private int codigo;
+    private String codigo;
     private String titulo;
     private String editora;
     private String autores;
     private String edicao;
     private int anoPublicacao;
+    private List<Exemplar> exemplares;
 
-    public void criarLivro(int codigo,
-                      String titulo,
-                      String editora,
-                      String autores,
-                      String edicao,
-                      int anoPublicacao){
+    public Livro(String codigo, String titulo, String editora, String autores, String edicao, int anoPublicacao) {
+        this.codigo = codigo;
+        this.titulo = titulo;
+        this.editora = editora;
+        this.autores = autores;
+        this.edicao = edicao;
+        this.anoPublicacao = anoPublicacao;
+        this.exemplares = new ArrayList<Exemplar>();
+    }
+
+    /*public void criarLivro(String codigo,
+            String titulo,
+            String editora,
+            String autores,
+            String edicao,
+            int anoPublicacao) {
 
         this.codigo = codigo;
         this.titulo = titulo;
         this.editora = editora;
         this.autores = autores;
-        this. edicao = edicao;
+        this.edicao = edicao;
         this.anoPublicacao = anoPublicacao;
 
         notificarObservadores();
-    }
+    }*/
 
-    public int getCodigo() {
+    
+
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
         notificarObservadores();
     }
@@ -83,5 +99,9 @@ public class Livro extends Sujeito{
     }
 
     public void consultarInformacoes() {
+    }
+
+    public void adicionarExemplar(String codigo) {
+        exemplares.add(new Exemplar(codigo, this, true));
     }
 }

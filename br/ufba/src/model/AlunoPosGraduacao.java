@@ -1,7 +1,7 @@
 package br.ufba.src.model;
 public class AlunoPosGraduacao extends Usuario {
 
-    public AlunoPosGraduacao(int codigo, String nome) {
+    public AlunoPosGraduacao(String codigo, String nome) {
         super(codigo, nome);
     }
 
@@ -22,6 +22,11 @@ public class AlunoPosGraduacao extends Usuario {
     @Override
     public void observarLivro(Livro livro) {
 
+    }
+
+    @Override
+    public int getPrazoEmprestimo() {
+        return 5;
     }
 
 }

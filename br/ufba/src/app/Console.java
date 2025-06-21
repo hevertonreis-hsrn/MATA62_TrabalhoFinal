@@ -51,7 +51,6 @@ public class Console {
         print("=== Sistema Encerrado ===");
     }
 
-
     public boolean servico(Parametros parametros) {
         Comando c = comandos.get(parametros.getComando());
         if (c == null) {

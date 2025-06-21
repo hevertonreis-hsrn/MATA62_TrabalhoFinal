@@ -1,24 +1,24 @@
 package br.ufba.src.app.command;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Parametros {
-    private ArrayList<Integer> parametros = new ArrayList<Integer>();
+    private List<String> parametros = new ArrayList<>();
     private String comando;
 
-    public Parametros(String[] strEntrada){
+    public Parametros(String[] strEntrada) {
         comando = strEntrada[0];
-        for(int i = 1; i < strEntrada.length; i++){
-            parametros.add(Integer.parseInt(strEntrada[i]));
+        for (int i = 1; i < strEntrada.length; i++) {
+            parametros.add(strEntrada[i]);
         }
     }
 
-    public String getComando(){
+    public String getComando() {
         return this.comando;
     }
 
-    public int getP(int i){
+    public String getP(int i) {
         return parametros.get(i - 1);
     }
-
 }

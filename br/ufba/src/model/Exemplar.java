@@ -1,15 +1,21 @@
 package br.ufba.src.model;
 public class Exemplar {
     
-    private int codigo;
+    private String codigo;
     private Livro livro;
     private boolean disponivel;
 
-    public int getCodigo() {
+    public Exemplar(String codigo, Livro livro, boolean disponivel) {
+        this.codigo = codigo;
+        this.livro = livro;
+        this.disponivel = disponivel;
+    }
+
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
