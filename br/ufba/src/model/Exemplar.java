@@ -27,11 +27,16 @@ public class Exemplar {
         this.livro = livro;
     }
 
-    public boolean isDisponivel() {
+    public boolean estaDisponivel() {
         return disponivel;
     }
 
-    public void setDisponivel(boolean disponivel) {
-        this.disponivel = disponivel;
+    public void definirComoEmprestado() {
+        this.disponivel = false;
     }
+
+    public void definirComoDisponivel() {
+        this.disponivel = true;
+    }
+
 }

@@ -10,7 +10,6 @@ public class EmpComando implements Comando {
         Repositorio repositorio = Repositorio.getInstancia();
 
         Usuario usuario = repositorio.buscarUsuarioPorCodigo(parametros.getP(1));
-
         Livro livro = repositorio.buscarLivroPorCodigo(parametros.getP(2));
 
         usuario.realizarEmprestimo(livro);

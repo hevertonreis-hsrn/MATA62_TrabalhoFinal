@@ -36,16 +36,20 @@ public class Repositorio {
         usuarios.add(new Professor("100", "Carlos Lucena"));
 
         Livro livro01 = new Livro("100", "Engenharia de Software", "Addison Wesley", "Ian Sommervile", "6ª", 2000);
+        livros.add(livro01);
         livro01.adicionarExemplar("01");
         livro01.adicionarExemplar("02");
 
         Livro livro02 = new Livro("101", "UML - Guia do Usuário", "Campus", "Grady Booch, James Rumbaugh, Ivar Jacobson", "7ª", 2000);
+        livros.add(livro02);
         livro02.adicionarExemplar("03");
 
         Livro livro03 = new Livro("200", "Code Complete", "Microsoft Press", "Steve McConnell", "2ª", 2014);
+        livros.add(livro03);
         livro03.adicionarExemplar("04");
 
         Livro livro04 = new Livro("201", "Agile Software Development, Principles, Patterns and Practices", "Prentice Hall", "Robert Martin", "1ª", 2002);
+        livros.add(livro04);
         livro04.adicionarExemplar("05");
     }
 

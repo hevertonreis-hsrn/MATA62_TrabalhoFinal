@@ -13,7 +13,7 @@ public class ObsComando implements Comando {
 
         Livro livro = repositorio.buscarLivroPorCodigo(parametros.getP(2));
 
-        usuario.observarLivro(livro);
+        //usuario.observarLivro(livro);
 
         return true;
     }

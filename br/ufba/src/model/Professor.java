@@ -1,31 +1,14 @@
 package br.ufba.src.model;
 
 import br.ufba.src.services.Observador;
+import br.ufba.src.services.RegraEmprestimoProfessor;
 import br.ufba.src.services.Sujeito;
 
 public class Professor extends Usuario implements Observador {
 
     public Professor(String codigo, String nome) {
         super(codigo, nome);
-    }
-
-    @Override
-    public void realizarEmprestimo(Livro livro) {
-    }
-
-    @Override
-    public void realizarDevolucao(Livro livro) {
-
-    }
-
-    @Override
-    public void realizarReserva(Livro livro) {
-
-    }
-
-    @Override
-    public void observarLivro(Livro livro) {
-
+        this.regraEmprestimo = new RegraEmprestimoProfessor();
     }
 
     @Override
@@ -35,9 +18,13 @@ public class Professor extends Usuario implements Observador {
     }
 
     @Override
-    public int getPrazoEmprestimo() {
+    public int getTempoEmprestimo() {
         return 8;
     }
 
+    @Override
+    public int getLimiteEmprestimos() {
+        return Integer.MAX_VALUE;
+    }
 
 }
