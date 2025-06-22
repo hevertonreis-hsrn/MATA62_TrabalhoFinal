@@ -5,18 +5,18 @@ import br.ufba.src.model.Usuario;
 
 public class RegraEmprestimoAluno implements RegraEmprestimo{
     @Override
-    public boolean podeEmprestar(Usuario usuario, Livro livro) {
+    public ResultadoOperacao podeEmprestar(Usuario usuario, Livro livro) {
         
         if(!livro.temExemplarDisponivel()){
-            return false;
+            return new ResultadoOperacao(false, "Nao eh possivel fazer um novo emprestimo! Nao existem exemplares disponiveis na biblioteca.");
         }
 
         if(usuario.temDevolucaoAtrasada()){
-            return false;
+            return new ResultadoOperacao(false, "Nao eh possivel fazer um novo emprestimo! Existem devolucoes em atraso para este usuario.");
         }
 
         if (usuario.qtdEmprestimosEmAberto() == usuario.getLimiteEmprestimos()) {
-            return false;
+            return new ResultadoOperacao(false, "Nao eh possivel fazer um novo emprestimo! Limite atingido.");
         }
 
         int qtdReservas = livro.qtdReservas();
@@ -24,13 +24,13 @@ public class RegraEmprestimoAluno implements RegraEmprestimo{
         boolean possuiReserva = livro.reservaPertenceAoUsuario(usuario);
 
         if (qtdReservas >= qtdExemplaresDisponiveis && !possuiReserva) {
-            return false;
+            return new ResultadoOperacao(false, "Nao eh possivel fazer um novo emprestimo! O livro esta reservado para outros alunos.");
         }
 
         if (usuario.possuiEmprestimoLivro(livro)) {
-            return false;
+            return new ResultadoOperacao(false, "Nao eh possivel fazer um novo emprestimo! O usuario possui um emprestimo em aberto deste livro.");
         }
 
-        return true;
+        return new ResultadoOperacao(true, "Emprestimo admitido.");
     }
 }

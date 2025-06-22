@@ -8,6 +8,12 @@ public class Reserva {
     private Livro livro;
     private LocalDate dataReserva;
 
+    public Reserva(Usuario usuario, Livro livro, LocalDate dataReserva) {
+        this.usuario = usuario;
+        this.livro = livro;
+        this.dataReserva = dataReserva;
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }

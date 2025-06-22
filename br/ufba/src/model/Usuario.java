@@ -5,18 +5,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.ufba.src.services.RegraEmprestimo;
+import br.ufba.src.services.ResultadoOperacao;
 
 public abstract class Usuario {
     
     protected String codigo;
     protected String nome;
     protected List<Emprestimo> emprestimos;
+    protected List<Reserva> reservas;
     protected RegraEmprestimo regraEmprestimo;
 
     public Usuario(String codigo, String nome) {
         this.codigo = codigo;
         this.nome = nome;
         this.emprestimos = new ArrayList<Emprestimo>();
+        this.reservas = new ArrayList<Reserva>();
     }
 
     public abstract int getTempoEmprestimo();
@@ -69,13 +72,16 @@ public abstract class Usuario {
         return false;
     }
 
-    private void adicionarEmprestimo(Emprestimo emprestimo) {
+    public void adicionarEmprestimo(Emprestimo emprestimo) {
         emprestimos.add(emprestimo);
     }
 
-    public void realizarEmprestimo(Livro livro){
-        if(!regraEmprestimo.podeEmprestar(this, livro)){
-            return;
+    public ResultadoOperacao realizarEmprestimo(Livro livro){
+
+        ResultadoOperacao resultadoOperacao = regraEmprestimo.podeEmprestar(this, livro);
+        
+        if(!resultadoOperacao.isSucesso()){
+            return resultadoOperacao;
         }
 
         Exemplar exemplar = livro.getExemplarDisponivel();
@@ -90,7 +96,12 @@ public abstract class Usuario {
         this.adicionarEmprestimo(emprestimo);
         exemplar.definirComoEmprestado();
         livro.removerReservaUsuario(this);
+
+        return new ResultadoOperacao(true, "Emprestimo realizado com sucesso!");
     }
 
+    public void adicionarReserva(Reserva reserva) {
+        reservas.add(reserva);
+    }
 
 }
