@@ -179,7 +179,6 @@ public class Repositorio {
             livro10,
             LocalDate.parse("2025-06-21")
         );
-        usuarioTeste01.adicionarReserva(reservaA1);
         livro10.adicionarReserva(reservaA1);
 
         Reserva reservaA2 = new Reserva(
@@ -187,7 +186,6 @@ public class Repositorio {
             livro10,
             LocalDate.parse("2025-06-21")
         );
-        usuarioTeste02.adicionarReserva(reservaA2);
         livro10.adicionarReserva(reservaA2);
     }
 

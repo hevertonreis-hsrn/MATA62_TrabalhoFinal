@@ -12,14 +12,12 @@ public abstract class Usuario {
     protected String codigo;
     protected String nome;
     protected List<Emprestimo> emprestimos;
-    protected List<Reserva> reservas;
     protected RegraEmprestimo regraEmprestimo;
 
     public Usuario(String codigo, String nome) {
         this.codigo = codigo;
         this.nome = nome;
         this.emprestimos = new ArrayList<Emprestimo>();
-        this.reservas = new ArrayList<Reserva>();
     }
 
     public abstract int getTempoEmprestimo();
@@ -98,10 +96,6 @@ public abstract class Usuario {
         livro.removerReservaUsuario(this);
 
         return new ResultadoOperacao(true, "Emprestimo realizado com sucesso!");
-    }
-
-    public void adicionarReserva(Reserva reserva) {
-        reservas.add(reserva);
     }
 
 }
