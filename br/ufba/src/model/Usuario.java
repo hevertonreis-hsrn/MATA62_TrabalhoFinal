@@ -24,10 +24,6 @@ public abstract class Usuario {
 
     public abstract int getLimiteEmprestimos();
 
-    public void realizarDevolucao(Livro livro){
-
-    }
-
     public void realizarReserva(Livro livro){
 
     }
@@ -96,6 +92,17 @@ public abstract class Usuario {
         livro.removerReservaUsuario(this);
 
         return new ResultadoOperacao(true, "Emprestimo realizado com sucesso!");
+    }
+
+    public ResultadoOperacao realizarDevolucao(Livro livro){
+        for (Emprestimo emprestimo : emprestimos) {
+            if(emprestimo.estaAberto() && emprestimo.getExemplar().getLivro().equals(livro)){
+                emprestimo.efetuarDevolucao();
+                return new ResultadoOperacao(true, "Devolucao realizada com sucesso!");
+            }
+        }
+
+        return new ResultadoOperacao(false, "Nao foi possivel efetuar a devolucao. Nao existe emprestimos em aberto para este livro.");
     }
 
 }

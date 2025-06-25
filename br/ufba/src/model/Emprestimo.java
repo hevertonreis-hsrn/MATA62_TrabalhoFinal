@@ -28,4 +28,9 @@ public class Emprestimo {
     public Exemplar getExemplar() {
         return exemplar;
     }
+
+    public void efetuarDevolucao() {
+        this.dataDevolucao = LocalDate.now();
+        this.exemplar.definirComoDisponivel();
+    }
 }
