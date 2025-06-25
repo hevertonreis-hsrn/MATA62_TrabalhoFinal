@@ -5,15 +5,15 @@ import br.ufba.src.model.Usuario;
 
 public class RegraEmprestimoProfessor implements RegraEmprestimo{
     @Override
-    public boolean podeEmprestar(Usuario usuario, Livro livro) {
+    public ResultadoOperacao podeEmprestar(Usuario usuario, Livro livro) {
         if(!livro.temExemplarDisponivel()){
-            return false;
+            return new ResultadoOperacao(false, "Nao eh possivel fazer um novo emprestimo! Nao existem exemplares disponiveis na biblioteca.");
         }
 
         if(usuario.temDevolucaoAtrasada()){
-            return false;
+            return new ResultadoOperacao(false, "Nao eh possivel fazer um novo emprestimo! Existem devolucoes em atraso para este usuario.");
         }
 
-        return true;
+        return new ResultadoOperacao(true, "Emprestimo admitido.");
     }
 }

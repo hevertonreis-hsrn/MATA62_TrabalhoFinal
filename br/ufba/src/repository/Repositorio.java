@@ -1,12 +1,15 @@
 package br.ufba.src.repository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import br.ufba.src.model.AlunoGraduacao;
 import br.ufba.src.model.AlunoPosGraduacao;
+import br.ufba.src.model.Emprestimo;
 import br.ufba.src.model.Livro;
 import br.ufba.src.model.Professor;
+import br.ufba.src.model.Reserva;
 import br.ufba.src.model.Usuario;
 
 public class Repositorio {
@@ -115,6 +118,75 @@ public class Repositorio {
             "3ª", 
             2003);
         livros.add(livro08);
+
+        // Massa de testes de casos de erro (emprestimo)
+        // Exemplar nao disponivel
+        Usuario usuarioTeste01 = new AlunoGraduacao("001", "Felipe Lucena");
+        usuarios.add(usuarioTeste01);
+        Livro livro09 = new Livro(
+            "003", 
+            "Livro com Exemplar Indisponivel", 
+            "Eng. Software I", 
+            "Heverton Reis", 
+            "0", 
+            2025);
+        livros.add(livro09);
+
+        // Devolucao em atraso
+        Emprestimo devolucaoAtrasada = new Emprestimo(
+            usuarioTeste01,
+            livro01.getExemplarDisponivel(), 
+            LocalDate.parse("2025-06-17"), 
+            LocalDate.parse("2025-06-21"));
+
+        usuarioTeste01.adicionarEmprestimo(devolucaoAtrasada);
+
+        // Emprestimos em aberto
+        Usuario usuarioTeste02 = new AlunoGraduacao("002", "Larisse M");
+        usuarios.add(usuarioTeste02);
+
+        Emprestimo emprestimoAberto01 = new Emprestimo(
+            usuarioTeste02,
+            livro01.getExemplarDisponivel(), 
+            LocalDate.parse("2025-06-21"), 
+            LocalDate.parse("2025-06-25"));
+
+        usuarioTeste02.adicionarEmprestimo(emprestimoAberto01);
+
+        Emprestimo emprestimoAberto02 = new Emprestimo(
+            usuarioTeste02,
+            livro07.getExemplarDisponivel(), 
+            LocalDate.parse("2025-06-21"), 
+            LocalDate.parse("2025-06-25"));
+
+        usuarioTeste02.adicionarEmprestimo(emprestimoAberto02);
+
+        // Usuario nao tem reserva
+        Usuario usuarioTeste03 = new AlunoGraduacao("003", "Jarbas Augusto");
+        usuarios.add(usuarioTeste03);
+        Livro livro10 = new Livro(
+            "010", 
+            "Livro com Todos os Exemplares Reservados", 
+            "Eng. Software I", 
+            "Heverton Reis", 
+            "0", 
+            2025);
+        livros.add(livro10);
+        livro10.adicionarExemplar("10");
+
+        Reserva reservaA1 = new Reserva(
+            usuarioTeste01,
+            livro10,
+            LocalDate.parse("2025-06-21")
+        );
+        livro10.adicionarReserva(reservaA1);
+
+        Reserva reservaA2 = new Reserva(
+            usuarioTeste02,
+            livro10,
+            LocalDate.parse("2025-06-21")
+        );
+        livro10.adicionarReserva(reservaA2);
     }
 
     public Usuario buscarUsuarioPorCodigo(String codigo){
