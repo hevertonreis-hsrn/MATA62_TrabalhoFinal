@@ -25,7 +25,7 @@ public class Console {
     public void iniciarComandos(){
         comandos.put("emp", new EmpComando(this));
         comandos.put("dev", new DevComando(this));
-        comandos.put("res", new ResComando());
+        comandos.put("res", new ResComando(this));
         comandos.put("obs", new ObsComando());
         comandos.put("liv", new LivComando());
         comandos.put("usu", new UsuComando());

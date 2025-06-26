@@ -108,6 +108,6 @@ public class Livro extends Sujeito {
     }
 
     public void adicionarReserva(Reserva reserva) {
-        reservas.add(reserva);
+        this.reservas.add(reserva);
     }
 }

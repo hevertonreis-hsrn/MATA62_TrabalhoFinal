@@ -24,10 +24,6 @@ public abstract class Usuario {
 
     public abstract int getLimiteEmprestimos();
 
-    public void realizarReserva(Livro livro){
-
-    }
-
     public String getCodigo() {
         return this.codigo;
     }
@@ -103,6 +99,18 @@ public abstract class Usuario {
         }
 
         return new ResultadoOperacao(false, "Nao foi possivel efetuar a devolucao. Nao existe emprestimos em aberto para este livro.");
+    }
+
+    
+    public ResultadoOperacao realizarReserva(Livro livro){
+        if (livro.reservaPertenceAoUsuario(this)) {
+            return new ResultadoOperacao(false, "Nao foi possivel efetuar a reserva. O usuario possui uma reserva para este livro.");
+        }
+
+        Reserva reserva = new Reserva(this, livro, LocalDate.now());
+        livro.adicionarReserva(reserva);
+
+        return new ResultadoOperacao(true, "Reserva realizada com sucesso!"); 
     }
 
 }

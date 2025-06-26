@@ -120,6 +120,7 @@ public class Repositorio {
         livros.add(livro08);
 
         // Massa de testes de casos de erro (emprestimo)
+        /* 
         // Exemplar nao disponivel
         Usuario usuarioTeste01 = new AlunoGraduacao("001", "Felipe Lucena");
         usuarios.add(usuarioTeste01);
@@ -187,6 +188,7 @@ public class Repositorio {
             LocalDate.parse("2025-06-21")
         );
         livro10.adicionarReserva(reservaA2);
+        */
     }
 
     public Usuario buscarUsuarioPorCodigo(String codigo){
