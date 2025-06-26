@@ -109,5 +109,9 @@ public class Livro extends Sujeito {
 
     public void adicionarReserva(Reserva reserva) {
         this.reservas.add(reserva);
+
+        if(this.reservas.size() > 2){
+            this.notificarObservadores();
+        }
     }
 }

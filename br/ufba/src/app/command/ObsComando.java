@@ -1,10 +1,19 @@
 package br.ufba.src.app.command;
 
+import br.ufba.src.app.Console;
 import br.ufba.src.model.Livro;
 import br.ufba.src.model.Usuario;
 import br.ufba.src.repository.Repositorio;
+import br.ufba.src.services.Observador;
 
 public class ObsComando implements Comando {
+
+    private Console console;
+
+    public ObsComando(Console console) {
+        this.console = console;
+    }
+    
     @Override
     public boolean executar(Parametros parametros) {
         Repositorio repositorio = Repositorio.getInstancia();
@@ -13,7 +22,9 @@ public class ObsComando implements Comando {
 
         Livro livro = repositorio.buscarLivroPorCodigo(parametros.getP(2));
 
-        //usuario.observarLivro(livro);
+        livro.adicionarObservador((Observador) usuario);
+
+        console.print("Usuario registrado como observador do livro.");
 
         return true;
     }

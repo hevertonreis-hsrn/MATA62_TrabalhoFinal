@@ -11,10 +11,18 @@ public class Professor extends Usuario implements Observador {
         this.regraEmprestimo = new RegraEmprestimoProfessor();
     }
 
+    private int contagemNotificacoes = 0;
     @Override
     public void notificar(Sujeito sujeito) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'notificar'");
+        contagemNotificacoes++;
+    }
+
+    public int getContagemNotificacoes(){
+        return contagemNotificacoes;
+    }
+
+    public void observarLivro(Livro livro){
+        livro.adicionarObservador(this);
     }
 
     @Override
