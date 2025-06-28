@@ -14,6 +14,18 @@ public class Reserva {
         this.dataReserva = dataReserva;
     }
 
+    public String getTituloLivro(){
+        return livro.getTitulo();
+    }
+
+    public Livro getLivro() {
+        return livro;
+    }
+
+    public LocalDate getDataReserva() {
+        return dataReserva;
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }

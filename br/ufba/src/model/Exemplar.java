@@ -4,11 +4,16 @@ public class Exemplar {
     private String codigo;
     private Livro livro;
     private boolean disponivel;
+    private Emprestimo emprestimo;
 
     public Exemplar(String codigo, Livro livro, boolean disponivel) {
         this.codigo = codigo;
         this.livro = livro;
         this.disponivel = disponivel;
+    }
+
+    public String getTituloLivro(){
+        return livro.getTitulo();
     }
 
     public String getCodigo() {
@@ -31,11 +36,17 @@ public class Exemplar {
         return disponivel;
     }
 
-    public void definirComoEmprestado() {
+    public Emprestimo getEmprestimo() {
+        return emprestimo;
+    }
+
+    public void definirComoEmprestado(Emprestimo emprestimo) {
+        this.emprestimo = emprestimo;
         this.disponivel = false;
     }
 
     public void definirComoDisponivel() {
+        this.emprestimo = null;
         this.disponivel = true;
     }
 

@@ -51,9 +51,6 @@ public class Livro extends Sujeito {
         return anoPublicacao;
     }
 
-    public void consultarInformacoes() {
-    }
-
     public void adicionarExemplar(String codigo) {
         exemplares.add(new Exemplar(codigo, this, true));
     }
@@ -69,6 +66,58 @@ public class Livro extends Sujeito {
 
     public int qtdReservas() {
         return reservas.size();
+    }
+
+    public String consultarInformacoes() {
+        String strRetorno = "| " + titulo +" |\n";
+        strRetorno += retornaUsuariosReserva();
+        strRetorno += retornaStatusExemplares();
+
+        return strRetorno;
+    }
+
+    public String retornaUsuariosReserva(){
+        Reserva reserva;
+        int quantidadeDeReservas = reservas.size();
+        String strRetorno = "| "+ quantidadeDeReservas + " Reservas |\n";
+
+        for(int i = 0; i < quantidadeDeReservas; i++){
+            reserva = reservas.get(i);
+            strRetorno += reserva.getUsuario();
+            if(i != quantidadeDeReservas - 1){
+                strRetorno += ", ";
+            }
+            else{
+                strRetorno += ".\n";
+            }
+        }
+
+        return strRetorno;
+    }
+
+    public String retornaStatusExemplares(){
+        Exemplar exemplar;
+        int quantidadeDeExemplares = exemplares.size();
+        String strRetorno ="| Exemplares |\n";
+
+        for(int i = 0; i < quantidadeDeExemplares; i++){
+            exemplar = exemplares.get(i);
+            strRetorno += "Código: " + exemplar.getCodigo() +
+                          " | Status: ";
+            if(exemplar.estaDisponivel()){
+                strRetorno += "Disponível";
+            }
+            else {
+                Emprestimo emprestimo = exemplar.getEmprestimo();
+                strRetorno += "Emprestado" +
+                              " | Usuário: " + emprestimo.getUsuario() +
+                              " | Data de empréstimo: " + emprestimo.getDataEmprestimo() +
+                              " | Data prevista para devolução: " + emprestimo.getDataDevolucaoEstimada();
+            }
+            strRetorno += "\n";
+        }
+
+        return strRetorno;
     }
 
     public int qtdExemplaresDisponiveis() {

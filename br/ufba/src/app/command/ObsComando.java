@@ -1,6 +1,7 @@
 package br.ufba.src.app.command;
 
 import br.ufba.src.app.Console;
+import br.ufba.src.constantes.Mensagem;
 import br.ufba.src.model.Livro;
 import br.ufba.src.model.Usuario;
 import br.ufba.src.repository.Repositorio;
@@ -24,7 +25,7 @@ public class ObsComando implements Comando {
 
         livro.adicionarObservador((Observador) usuario);
 
-        console.print("Usuario registrado como observador do livro.");
+        console.print(Mensagem.observadorRegistrado);
 
         return true;
     }

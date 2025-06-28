@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.ufba.src.constantes.Mensagem;
 import br.ufba.src.services.RegraEmprestimo;
 import br.ufba.src.services.ResultadoOperacao;
 
@@ -12,27 +13,65 @@ public abstract class Usuario {
     protected String codigo;
     protected String nome;
     protected List<Emprestimo> emprestimos;
+    protected List<Reserva> reservas;
     protected RegraEmprestimo regraEmprestimo;
+    protected int tempoEmprestimo;
+    protected int limiteEmprestimos;
 
     public Usuario(String codigo, String nome) {
         this.codigo = codigo;
         this.nome = nome;
         this.emprestimos = new ArrayList<Emprestimo>();
+        this.reservas = new ArrayList<Reserva>(); 
     }
 
-    public abstract int getTempoEmprestimo();
+    public int getTempoEmprestimo(){
+        return tempoEmprestimo;
+    }
 
-    public abstract int getLimiteEmprestimos();
+    public int getLimiteEmprestimos(){
+        return limiteEmprestimos;
+    }
 
     public String getCodigo() {
         return this.codigo;
     }
 
-    public void consultarNotificacoes() {
+    public int consultarNotificacoes(){return 0;}
+
+    public String consultarInformacoes() {
+        String strRetorno = retornaListaEmprestimos();
+        strRetorno += retornaListaReservas();
+
+        return strRetorno;
     }
 
-    public void consultarInformacoes() {
+    public String retornaListaEmprestimos() {
+        String strRetorno = "| Empréstimos |\n";
+        for (Emprestimo emprestimo : emprestimos) {
+            strRetorno += emprestimo.getTituloLivro() +
+                    " | Data de empréstimo: " + emprestimo.getDataEmprestimo() +
+                    " | Status: ";
+            if (emprestimo.estaAberto()) {
+                strRetorno += "Em curso" +
+                        " | Data prevista para devolução: " + emprestimo.getDataDevolucaoEstimada();
+            } else {
+                strRetorno += "Finalizado" +
+                        " | Data de devolução: " + emprestimo.getDataDevolucao();
+            }
+            strRetorno += "\n";
+        }
+        return strRetorno;
     }
+
+    public String retornaListaReservas() {
+            String strRetorno = "| Reservas |\n";
+            for (Reserva reserva : reservas) {
+                strRetorno += reserva.getTituloLivro() +
+                              " | Data de solicitação da reserva: " + reserva.getDataReserva() +"\n";
+            }
+            return strRetorno;
+        }
 
     public boolean temDevolucaoAtrasada() {
         for (Emprestimo emprestimo : emprestimos) {
@@ -66,6 +105,10 @@ public abstract class Usuario {
         emprestimos.add(emprestimo);
     }
 
+    public void adicionarReserva(Reserva reserva){
+        reservas.add(reserva);
+    }
+
     public ResultadoOperacao realizarEmprestimo(Livro livro){
 
         ResultadoOperacao resultadoOperacao = regraEmprestimo.podeEmprestar(this, livro);
@@ -79,38 +122,43 @@ public abstract class Usuario {
         LocalDate dataEmprestimo = LocalDate.now();
         Emprestimo emprestimo = new Emprestimo(
             this, 
-            exemplar, 
-            dataEmprestimo, 
-            dataEmprestimo.plusDays(getTempoEmprestimo()));
+                    exemplar,
+                    dataEmprestimo,
+                    dataEmprestimo.plusDays(getTempoEmprestimo()));
 
         this.adicionarEmprestimo(emprestimo);
-        exemplar.definirComoEmprestado();
+        exemplar.definirComoEmprestado(emprestimo);
         livro.removerReservaUsuario(this);
 
-        return new ResultadoOperacao(true, "Emprestimo realizado com sucesso!");
+        return resultadoOperacao;
     }
 
     public ResultadoOperacao realizarDevolucao(Livro livro){
         for (Emprestimo emprestimo : emprestimos) {
             if(emprestimo.estaAberto() && emprestimo.getExemplar().getLivro().equals(livro)){
                 emprestimo.efetuarDevolucao();
-                return new ResultadoOperacao(true, "Devolucao realizada com sucesso!");
+                return new ResultadoOperacao(true, Mensagem.devolucao);
             }
         }
 
-        return new ResultadoOperacao(false, "Nao foi possivel efetuar a devolucao. Nao existe emprestimos em aberto para este livro.");
+        return new ResultadoOperacao(false, Mensagem.semDevolucao);
     }
 
     
     public ResultadoOperacao realizarReserva(Livro livro){
         if (livro.reservaPertenceAoUsuario(this)) {
-            return new ResultadoOperacao(false, "Nao foi possivel efetuar a reserva. O usuario possui uma reserva para este livro.");
+            return new ResultadoOperacao(false, Mensagem.semReserva);
         }
 
         Reserva reserva = new Reserva(this, livro, LocalDate.now());
+        this.adicionarReserva(reserva);
         livro.adicionarReserva(reserva);
 
-        return new ResultadoOperacao(true, "Reserva realizada com sucesso!"); 
+        return new ResultadoOperacao(true, Mensagem.reserva);
+    }
+
+    public String toString(){
+        return this.nome;
     }
 
 }

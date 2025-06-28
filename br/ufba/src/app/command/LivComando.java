@@ -1,9 +1,16 @@
 package br.ufba.src.app.command;
 
+import br.ufba.src.app.Console;
 import br.ufba.src.model.Livro;
 import br.ufba.src.repository.Repositorio;
 
 public class LivComando implements Comando {
+
+    private Console console;
+
+    public LivComando(Console console) {
+        this.console = console;
+    }
 
     @Override
     public boolean executar(Parametros parametros) {
@@ -11,7 +18,9 @@ public class LivComando implements Comando {
 
         Livro livro = repositorio.buscarLivroPorCodigo(parametros.getP(1));
 
-        livro.consultarInformacoes();
+        String dados = livro.consultarInformacoes();
+
+        console.print(dados);
 
         return true;
     }

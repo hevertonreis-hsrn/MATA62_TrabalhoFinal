@@ -3,16 +3,8 @@ package br.ufba.src.app;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import br.ufba.src.app.command.Comando;
-import br.ufba.src.app.command.DevComando;
-import br.ufba.src.app.command.EmpComando;
-import br.ufba.src.app.command.LivComando;
-import br.ufba.src.app.command.NtfComando;
-import br.ufba.src.app.command.ObsComando;
-import br.ufba.src.app.command.Parametros;
-import br.ufba.src.app.command.ResComando;
-import br.ufba.src.app.command.SaiComando;
-import br.ufba.src.app.command.UsuComando;
+import br.ufba.src.app.command.*;
+import br.ufba.src.constantes.Mensagem;
 
 public class Console {
     public Scanner entrada = new Scanner(System.in);
@@ -27,9 +19,9 @@ public class Console {
         comandos.put("dev", new DevComando(this));
         comandos.put("res", new ResComando(this));
         comandos.put("obs", new ObsComando(this));
-        comandos.put("liv", new LivComando());
-        comandos.put("usu", new UsuComando());
-        comandos.put("ntf", new NtfComando());
+        comandos.put("liv", new LivComando(this));
+        comandos.put("usu", new UsuComando(this));
+        comandos.put("ntf", new NtfComando(this));
         comandos.put("sai", new SaiComando());
     }
 
@@ -40,27 +32,22 @@ public class Console {
     }
 
     public void iniciar() {
-        print("=== Sistema Biblioteca Iniciado ===");
-        print("Digite um comando ou 'sai' para encerrar.");
+        print(Mensagem.iniciando);
 
-        boolean continuar = true;
-        while (continuar) {
-            continuar = processarEntradaConsole();
-        }
+        while (processarEntradaConsole());
 
-        print("=== Sistema Encerrado ===");
+        print(Mensagem.encerrando);
     }
 
     public boolean servico(Parametros parametros) {
         Comando c = comandos.get(parametros.getComando());
         if (c == null) {
-            print("Comando invalido.");
+            print(Mensagem.comandoInvalido);
             return true; // Continua executando
         }
         return c.executar(parametros);
     }
 
-    //TODO: Giovane vai fazer alguma coisa 
     public void print(String texto){
         System.out.println(texto);
     }
