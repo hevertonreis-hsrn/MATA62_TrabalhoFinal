@@ -149,11 +149,7 @@ public class Livro extends Sujeito {
     }
 
     public void removerReservaUsuario(Usuario usuario) {
-        for (Reserva reserva: reservas) {
-            if(reserva.getUsuario().equals(usuario)){
-                reservas.remove(reserva);
-            }
-        }
+        reservas.removeIf(reserva -> reserva.getUsuario().equals(usuario));
     }
 
     public void adicionarReserva(Reserva reserva) {
