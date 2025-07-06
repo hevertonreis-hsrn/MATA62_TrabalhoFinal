@@ -1,0 +1,290 @@
+@startuml
+
+class Console {
+    + entrada : Scanner
+    - comandos : HashMap
+    + iniciarComandos() : void
+    + processarEntradaConsole() : boolean
+    + iniciar() : void
+    + servico(Parametros) : boolean
+    + print(String) : void
+}
+
+class SistemaBiblioteca {
+    + main(String) : void
+}
+
+interface Comando {
+    + executar(Parametros) : boolean
+}
+
+class DevComando {
+    - console : Console
+    + executar(Parametros) : boolean
+}
+
+class EmpComando {
+    - console : Console
+    + executar(Parametros) : boolean
+}
+
+class LivComando {
+    - console : Console
+    + executar(Parametros) : boolean
+}
+
+class NtfComando {
+    - console : Console
+    + executar(Parametros) : boolean
+}
+
+class ObsComando {
+    - console : Console
+    + executar(Parametros) : boolean
+}
+
+class Parametros {
+    - parametros : List
+    - comando : String
+    + getComando() : String
+    + getP(int) : String
+}
+
+class ResComando {
+    - console : Console
+    + executar(Parametros) : boolean
+}
+
+class SaiComando {
+    + executar(Parametros) : boolean
+}
+
+class UsuComando {
+    - console : Console
+    + executar(Parametros) : boolean
+}
+
+class ConstantesEmprestimo {
+    + tempoEmprestimoGraduacao : int
+    + tempoEmprestimoPosGraduacao : int
+    + tempoEmprestimoProfessor : int
+    + limiteEmprestimoGraduacao : int
+    + limiteEmprestimoPosGraduacao : int
+    + limiteEmprestimoProfessor : int
+}
+
+class Mensagem {
+    + iniciando : String
+    + encerrando : String
+    + comandoInvalido : String
+    + emprestimo : String
+    + semEmprestimo : String
+    + semExemplares : String
+    + devolucoesEmAtraso : String
+    + limiteAtingido : String
+    + livroReservado : String
+    + emprestimoEmAberto : String
+    + devolucao : String
+    + semDevolucao : String
+    + reserva : String
+    + semReserva : String
+    + observadorRegistrado : String
+    + totalNotificacoes : String
+}
+
+class AlunoGraduacao {
+}
+
+class AlunoPosGraduacao {
+}
+
+class Emprestimo {
+    - usuario : Usuario
+    - exemplar : Exemplar
+    - dataEmprestimo : LocalDate
+    - dataDevolucaoEstimada : LocalDate
+    - dataDevolucao : LocalDate
+    + getTituloLivro() : String
+    + getUsuario() : Usuario
+    + getDataEmprestimo() : LocalDate
+    + getDataDevolucaoEstimada() : LocalDate
+    + getDataDevolucao() : LocalDate
+    + estaAtrasado() : boolean
+    + estaAberto() : boolean
+    + getExemplar() : Exemplar
+    + efetuarDevolucao() : void
+}
+
+class Exemplar {
+    - codigo : String
+    - livro : Livro
+    - disponivel : boolean
+    - emprestimo : Emprestimo
+    + getTituloLivro() : String
+    + getCodigo() : String
+    + setCodigo(String) : void
+    + getLivro() : Livro
+    + setLivro(Livro) : void
+    + estaDisponivel() : boolean
+    + getEmprestimo() : Emprestimo
+    + definirComoEmprestado(Emprestimo) : void
+    + definirComoDisponivel() : void
+}
+
+class Livro {
+    - codigo : String
+    - titulo : String
+    - editora : String
+    - autores : String
+    - edicao : String
+    - anoPublicacao : int
+    - exemplares : List
+    - reservas : List
+    + getCodigo() : String
+    + getTitulo() : String
+    + getEditora() : String
+    + getAutores() : String
+    + getEdicao() : String
+    + getAnoPublicacao() : int
+    + adicionarExemplar(String) : void
+    + temExemplarDisponivel() : boolean
+    + qtdReservas() : int
+    + consultarInformacoes() : String
+    + retornaUsuariosReserva() : String
+    + retornaStatusExemplares() : String
+    + qtdExemplaresDisponiveis() : int
+    + reservaPertenceAoUsuario(Usuario) : boolean
+    + getExemplarDisponivel() : Exemplar
+    + removerReservaUsuario(Usuario) : void
+    + adicionarReserva(Reserva) : void
+}
+
+class Professor {
+    - numeroNotificacoes : int
+    + notificar(Sujeito) : void
+    + consultarNotificacoes() : int
+    + observarLivro(Livro) : void
+}
+
+class Reserva {
+    - usuario : Usuario
+    - livro : Livro
+    - dataReserva : LocalDate
+    + getTituloLivro() : String
+    + getLivro() : Livro
+    + getDataReserva() : LocalDate
+    + getUsuario() : Usuario
+}
+
+class Usuario {
+    # codigo : String
+    # nome : String
+    # emprestimos : List
+    # reservas : List
+    # regraEmprestimo : RegraEmprestimo
+    # tempoEmprestimo : int
+    # limiteEmprestimos : int
+    + getTempoEmprestimo() : int
+    + getLimiteEmprestimos() : int
+    + getCodigo() : String
+    + consultarNotificacoes() : int
+    + consultarInformacoes() : String
+    + retornaListaEmprestimos() : String
+    + retornaListaReservas() : String
+    + temDevolucaoAtrasada() : boolean
+    + qtdEmprestimosEmAberto() : int
+    + possuiEmprestimoLivro(Livro) : boolean
+    + adicionarEmprestimo(Emprestimo) : void
+    + adicionarReserva(Reserva) : void
+    + realizarEmprestimo(Livro) : ResultadoOperacao
+    + realizarDevolucao(Livro) : ResultadoOperacao
+    + realizarReserva(Livro) : ResultadoOperacao
+    + toString() : String
+}
+
+class Repositorio {
+    - usuarios : List
+    - livros : List
+    - instancia : Repositorio
+    + getInstancia() : Repositorio
+    - carregarDadosDeTeste() : void
+    + buscarUsuarioPorCodigo(String) : Usuario
+    + buscarLivroPorCodigo(String) : Livro
+}
+
+interface Observador {
+    ~ notificar(Sujeito) : void
+}
+
+interface RegraEmprestimo {
+    ~ podeEmprestar(Usuario, Livro) : ResultadoOperacao
+}
+
+class RegraEmprestimoAluno {
+    + podeEmprestar(Usuario, Livro) : ResultadoOperacao
+}
+
+class RegraEmprestimoProfessor {
+    + podeEmprestar(Usuario, Livro) : ResultadoOperacao
+}
+
+class ResultadoOperacao {
+    - sucesso : boolean
+    - mensagem : String
+    + isSucesso() : boolean
+    + getMensagem() : String
+}
+
+class Sujeito {
+    - observadores : ArrayList
+    + adicionarObservador(Observador) : void
+    + removerObservador(Observador) : void
+    + notificarObservadores() : void
+}
+
+Console "1" --> "1" Scanner
+Console "1" --> "*" String
+Comando <|.. DevComando
+DevComando "1" --> "1" Console
+Comando <|.. EmpComando
+EmpComando "1" --> "1" Console
+Comando <|.. LivComando
+LivComando "1" --> "1" Console
+Comando <|.. NtfComando
+NtfComando "1" --> "1" Console
+Comando <|.. ObsComando
+ObsComando "1" --> "1" Console
+Parametros "1" --> "*" String
+Comando <|.. ResComando
+ResComando "1" --> "1" Console
+Comando <|.. SaiComando
+Comando <|.. UsuComando
+UsuComando "1" --> "1" Console
+Usuario <|-- AlunoGraduacao
+Usuario <|-- AlunoPosGraduacao
+Emprestimo "1" --> "1" Usuario
+Emprestimo "1" --> "1" Exemplar
+Emprestimo "1" --> "1" LocalDate
+Emprestimo "1" --> "1" LocalDate
+Emprestimo "1" --> "1" LocalDate
+Exemplar "1" --> "1" Livro
+Exemplar "1" --> "1" Emprestimo
+Sujeito <|-- Livro
+Livro "1" --> "*" Exemplar
+Livro "1" --> "*" Reserva
+Usuario <|-- Professor
+Observador <|.. Professor
+Reserva "1" --> "1" Usuario
+Reserva "1" --> "1" Livro
+Reserva "1" --> "1" LocalDate
+Usuario "1" --> "*" Emprestimo
+Usuario "1" --> "*" Reserva
+Usuario "1" --> "1" RegraEmprestimo
+Repositorio "1" --> "*" Usuario
+Repositorio "1" --> "*" Livro
+Repositorio "1" --> "1" Repositorio
+RegraEmprestimo <|.. RegraEmprestimoAluno
+RegraEmprestimo <|.. RegraEmprestimoProfessor
+Sujeito "1" --> "*" Observador
+
+@enduml
