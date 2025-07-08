@@ -242,8 +242,6 @@ class Sujeito {
     + notificarObservadores() : void
 }
 
-Console "1" --> "1" Scanner
-Console "1" --> "*" String
 Comando <|.. DevComando
 DevComando "1" --> "1" Console
 Comando <|.. EmpComando
@@ -254,7 +252,6 @@ Comando <|.. NtfComando
 NtfComando "1" --> "1" Console
 Comando <|.. ObsComando
 ObsComando "1" --> "1" Console
-Parametros "1" --> "*" String
 Comando <|.. ResComando
 ResComando "1" --> "1" Console
 Comando <|.. SaiComando
@@ -262,23 +259,14 @@ Comando <|.. UsuComando
 UsuComando "1" --> "1" Console
 Usuario <|-- AlunoGraduacao
 Usuario <|-- AlunoPosGraduacao
-Emprestimo "1" --> "1" Usuario
-Emprestimo "1" --> "1" Exemplar
-Emprestimo "1" --> "1" LocalDate
-Emprestimo "1" --> "1" LocalDate
-Emprestimo "1" --> "1" LocalDate
-Exemplar "1" --> "1" Livro
-Exemplar "1" --> "1" Emprestimo
+Emprestimo "1" <--> "1" Exemplar
 Sujeito <|-- Livro
-Livro "1" --> "*" Exemplar
-Livro "1" --> "*" Reserva
+Livro "1" <--> "*" Exemplar
+Livro "1" <--> "*" Reserva
 Usuario <|-- Professor
 Observador <|.. Professor
-Reserva "1" --> "1" Usuario
-Reserva "1" --> "1" Livro
-Reserva "1" --> "1" LocalDate
-Usuario "1" --> "*" Emprestimo
-Usuario "1" --> "*" Reserva
+Usuario "1" <--> "*" Emprestimo
+Usuario "1" <--> "*" Reserva
 Usuario "1" --> "1" RegraEmprestimo
 Repositorio "1" --> "*" Usuario
 Repositorio "1" --> "*" Livro
